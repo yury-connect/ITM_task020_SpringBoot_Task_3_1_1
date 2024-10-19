@@ -1,4 +1,4 @@
-package web.mpdel;
+package web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

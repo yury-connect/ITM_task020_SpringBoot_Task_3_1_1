@@ -1,18 +1,15 @@
 package web.util;
 
 import net.datafaker.Faker;
-import web.mpdel.Car;
+import web.model.Car;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.ibm.icu.text.Transliterator;
 
 
 public class CarUtils {

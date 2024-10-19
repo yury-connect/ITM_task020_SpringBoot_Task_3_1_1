@@ -1,4 +1,4 @@
-import web.mpdel.Car;
+import web.model.Car;
 import web.util.CarUtils;
 
 import java.util.List;
