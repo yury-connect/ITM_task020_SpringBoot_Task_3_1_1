@@ -13,6 +13,8 @@ public interface CarService {
 
     List<Car> getAll();
 
+    List<Car> get(Integer count);
+
     void update(Car car);
 
     void delete(int id);

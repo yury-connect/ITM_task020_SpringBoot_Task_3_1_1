@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Delete car page</title>
+<!--        <link rel="stylesheet" type="text/css" href="http://localhost:8088/css/styles.css">-->
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    </head>
+
+    <body>
+        <h1>Delete car:</h1>
+
+        <table border="5">
+            <tr>
+                <td style = "width: 250px; background-color: lightcyan; text-align: center;">Parameter</td>
+                <td style = "width: 350px; background-color: lightcyan; text-align: center;">Value</td>
+            </tr>
+            <tr>
+                <td class="padded-cell20">Id</td>
+                <td class="padded-cell20" th:text="${removed_car.getId()}">Id</td>
+            </tr>
+            <tr>
+                <td class="padded-cell20">Model</td>
+                <td class="padded-cell20" th:text="${removed_car.getModel()}">Model</td>
+            </tr>
+            <tr>
+                <td class="padded-cell20">Color</td>
+                <td class="padded-cell20" th:text="${removed_car.getColor()}">Color</td>
+            </tr>
+            <tr>
+                <td class="padded-cell20">Release Date</td>
+                <td class="padded-cell20" th:text="${removed_car.getReleaseDate()}">ReleaseDate</td>
+            </tr>
+
+        </table>
+        <br/> <br/> <hr/> <br/>
+
+
+
+        <table border="0">
+            <tr>
+                <td style = "width: 200px; text-align: center;">
+                    <form th:action="@{/cars/delete}" method="POST" style="display:inline;">
+                        <input type="hidden" name="id_removed_car" th:value="${removed_car.getId()}" />
+                        <input type="submit" value="Confirm DELETION"/></form>
+                    <br/>
+                </td>
+                <td style = "width: 200px; text-align: center;">
+                    <form th:method="GET" th:action="@{/cars}">
+                        <input type="submit" value="Cancel"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

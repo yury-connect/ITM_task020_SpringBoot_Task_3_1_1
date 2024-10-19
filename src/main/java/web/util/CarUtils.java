@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class CarUtils {
+public  class CarUtils {
 
     public static List<Car> generateCar(int count) {
         List<Car> cars = Stream.generate(() -> generateCar())

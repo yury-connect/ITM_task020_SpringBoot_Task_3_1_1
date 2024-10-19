@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit car page</title>
+    </head>
+
+    <body>
+        <h1>Edit car:</h1>
+
+        <form th:action="@{/cars/edit}" th:object="${edited_car}" method="POST">
+            <input type="hidden" th:field="*{id}">
+
+            <label for="id_">Id:</label>
+            <input type="text" id="id_" th:field="*{id}" size="70" maxlength="150" readonly required>
+            <br/> <br/>
+
+            <label for="model_">Model:</label>
+            <input type="text" id="model_" th:field="*{model}" size="70" maxlength="150" required>
+            <br/> <br/>
+
+            <label for="color_">Color:</label>
+            <input type="text" id="color_" th:field="*{color}" size="70" maxlength="150" required>
+            <br/> <br/>
+
+            <label for="releaseDate_">ReleaseDate:</label>
+            <input type="date" id="releaseDate_" th:field="*{releaseDate}">
+            <br/> <br/>
+
+            <br/> <br/> <br/>
+
+            <table border="0">
+                <tr>
+                    <td style = "width: 200px; text-align: center;">
+                        <input type="submit" value="Save changes">
+                        <br/>
+                    </td>
+                    <td style = "width: 200px; text-align: center;">
+                        <form th:method="GET" th:action="@{/cars}">
+                            <input type="submit" value="Cancel"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+        <br/> <br/> <hr/> <br/> <br/>
+
+    </body>
+</html>
