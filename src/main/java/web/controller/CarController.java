@@ -76,13 +76,12 @@ public class CarController {
     public String showCreateCarPage(Model model) {
         Car defaultCar = CarUtils.generateCar();
 
-        defaultCar.setId(service.getAll().size() + 1);
-        defaultCar.setModel("Default MODEL // " + defaultCar.getModel());
-        defaultCar.setColor("Default COLOR // " + defaultCar.getColor());
+        defaultCar.setId(-1);
+        defaultCar.setModel("Default_MODEL // " + defaultCar.getModel());
+        defaultCar.setColor("Default_COLOR // " + defaultCar.getColor());
         defaultCar.setReleaseDate(new Date(System.currentTimeMillis()));
 
         model.addAttribute("created_car", defaultCar);
-        System.out.println("defaultCar = " + defaultCar);
         return "add_car_page";
     }
     @PostMapping("/create")

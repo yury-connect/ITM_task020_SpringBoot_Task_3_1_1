@@ -11,6 +11,7 @@ import java.util.List;
 public class CarDaoImpl implements CarDao {
 
     private List<Car> cars;
+    private int counterId;
 
 
     public CarDaoImpl() {
@@ -20,8 +21,7 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void save(Car car) {
-        int id = cars.size() == 0 ? 0 : cars.get(cars.size() - 1).getId() + 1;
-        car.setId(id);
+        car.setId(counterId++);
         cars.add(car);
     }
 

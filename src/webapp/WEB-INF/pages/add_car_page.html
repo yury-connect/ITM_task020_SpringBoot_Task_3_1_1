@@ -10,7 +10,7 @@
 
         <form  action="#" th:action="@{/cars/create}" th:object="${created_car}" method="POST">
             <label for="id_">Id:</label>
-            <input type="text" id="id_" th:field="*{id}" th:value="${created_car.getId()}" readonly required>
+            <input type="text" id="id_" size="70" maxlength="150" value="Will be assigned after creation" readonly required>
             <br/> <br/>
 
             <label for="model_">Model:</label>
