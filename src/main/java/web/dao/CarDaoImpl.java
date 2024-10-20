@@ -20,7 +20,8 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void save(Car car) {
-        car.setId(cars.size() + 1);
+        int id = cars.size() == 0 ? 0 : cars.get(cars.size() - 1).getId() + 1;
+        car.setId(id);
         cars.add(car);
     }
 

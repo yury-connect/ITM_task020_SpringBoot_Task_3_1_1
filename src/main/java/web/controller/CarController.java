@@ -29,8 +29,6 @@ public class CarController {
     @GetMapping("/{count}")
     public String generateCars(@PathVariable Integer count, Model model) {
         CarUtils.generateCar(count).stream().forEach(car -> service.save(car));
-        System.out.println("Вывожу все 'Car' из БД: ");             // ******************   УДАЛИТЬ   ******************
-        service.getAll().stream().forEach(System.out::println);     // ******************   УДАЛИТЬ   ******************
         return "redirect:/cars";
     }
 
@@ -77,6 +75,7 @@ public class CarController {
     @GetMapping("/create")
     public String showCreateCarPage(Model model) {
         Car defaultCar = CarUtils.generateCar();
+
         defaultCar.setId(service.getAll().size() + 1);
         defaultCar.setModel("Default MODEL // " + defaultCar.getModel());
         defaultCar.setColor("Default COLOR // " + defaultCar.getColor());
