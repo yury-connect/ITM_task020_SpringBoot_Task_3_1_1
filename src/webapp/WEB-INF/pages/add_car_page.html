@@ -8,5 +8,40 @@
     <body>
         <h1>Add car:</h1>
 
+        <form  action="#" th:action="@{/cars/create}" th:object="${created_car}" method="POST">
+            <label for="id_">Id:</label>
+            <input type="text" id="id_" th:field="*{id}" th:value="${created_car.getId()}" readonly required>
+            <br/> <br/>
+
+            <label for="model_">Model:</label>
+            <input type="text" id="model_" th:field="*{model}" size="70" maxlength="150" th:value="${created_car.getModel()}" required>
+            <br/> <br/>
+
+            <label for="color_">Color:</label>
+            <input type="text" id="color_" th:field="*{color}" size="70" maxlength="150" th:value="${created_car.getColor()}" required>
+            <br/> <br/>
+
+            <label for="releaseDate_">ReleaseDate:</label>
+            <input type="date" id="releaseDate_" th:field="*{releaseDate}" th:value="${created_car.getReleaseDate()}">
+            <br/> <br/>
+
+            <br/> <br/> <br/>
+
+            <table border="0">
+                <tr>
+                    <td style = "width: 200px; text-align: center;">
+                        <input type="submit" value="Create this car">
+                        <br/>
+                    </td>
+                    <td style = "width: 200px; text-align: center;">
+                        <form th:method="GET" th:action="@{/cars}">
+                            <input type="submit" value="Cancel"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+        <br/> <br/> <hr/> <br/> <br/>
     </body>
 </html>

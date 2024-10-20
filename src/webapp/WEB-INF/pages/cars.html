@@ -9,12 +9,11 @@
     <h1>All cars:</h1>
     <table border="3">
         <tr>
-            <th style="width: 10%; background-color: lightcyan;">Id</th>
-            <th style="width: 25%; background-color: lightcyan;">Model</th>
-            <th style="width: 15%; background-color: lightcyan;">Color</th>
-            <th style="width: 20%; background-color: lightcyan;">Release Date</th>
-            <th style="width: 15%; background-color: lightcyan;">Edit</th>
-            <th style="width: 15%; background-color: lightcyan;">Delete</th>
+            <th style="width: 31%; background-color: lightcyan;">Model</th>
+            <th style="width: 20%; background-color: lightcyan;">Color</th>
+            <th style="width: 15%; background-color: lightcyan;">Release Date</th>
+            <th style="width: 12%; background-color: lightcyan;">Edit</th>
+            <th style="width: 12%; background-color: lightcyan;">Delete</th>
         </tr>
 
         <tr th:each="car : ${car_list}">
@@ -30,7 +29,7 @@
     <br/> <br/> <hr/> <br/>
 
     <form th:method="GET" th:action="@{/cars/create}">
-        <input type="submit" value="Create new user"/>
+        <input type="submit" value="Create new car"/>
     </form>
     <br/> <br/> <hr/> <br/>
 
@@ -42,8 +41,8 @@
     </form>
     <br/> <br/> <hr/> <br/>
 
-    <form th:method="POST" th:action="@{/cars/delete-all}">
-        <input type="submit" value="Delete all users"/>
+    <form th:method="POST" th:action="@{/cars/delete_all}">
+        <input type="submit" value="Delete all cars"/>
     </form>
     <br/> <br/>
 
