@@ -8,13 +8,13 @@ import java.util.List;
 
 
 @Repository
-public class CarDaoImpl implements CarDao {
+public class CarDaoImplList implements CarDao {
 
     private List<Car> cars;
     private int counterId;
 
 
-    public CarDaoImpl() {
+    public CarDaoImplList() {
         this.cars = new ArrayList<>();
     }
 

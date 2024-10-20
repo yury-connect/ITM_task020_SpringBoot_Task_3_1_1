@@ -63,7 +63,7 @@ public class CarController {
     @GetMapping("/edit")
     public String showEditCarPage(@RequestParam("id_edited_car") Integer id, Model model) {
         model.addAttribute("edited_car", service.getById(id));
-        return "edit_car_page";
+        return "update_car_page";
     }
     @PostMapping("/edit")
     public String editCar(@ModelAttribute("edited_car") Car car) {
@@ -82,7 +82,7 @@ public class CarController {
         defaultCar.setReleaseDate(new Date(System.currentTimeMillis()));
 
         model.addAttribute("created_car", defaultCar);
-        return "add_car_page";
+        return "create_car_page";
     }
     @PostMapping("/create")
     public String createCar(@ModelAttribute("created_car") Car car) {
