@@ -10,6 +10,8 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id

@@ -16,8 +16,7 @@ public class ServiceImpl implements Service {
 
 
     @Autowired
-//    @Qualifier("DaoImpl")
-    public ServiceImpl(Dao dao) {
+    public ServiceImpl(@Qualifier("daoImpDB")Dao dao) { // daoImplList   or   daoImpDB
         this.dao = dao;
     }
 

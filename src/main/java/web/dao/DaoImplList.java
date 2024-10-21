@@ -1,5 +1,6 @@
 package web.dao;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import web.model.User;
 
@@ -7,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Repository
+@Repository("daoImplList")
+@Primary // Этот бин будет использоваться по умолчанию, если не указано иное
 public class DaoImplList implements Dao {
 
     private List<User> users;
