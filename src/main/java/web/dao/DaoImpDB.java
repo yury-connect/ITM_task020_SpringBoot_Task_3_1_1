@@ -1,5 +1,6 @@
 package web.dao;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,16 +26,16 @@ public class DaoImpDB implements Dao {
    @Override
    @Transactional
    public void save(User user) {
-      sessionFactory.getCurrentSession().save(user);
+      Session session = sessionFactory.getCurrentSession();
+      session.save(user);
    }
 
 
    @Override
    @Transactional
    public User getById(int id) {
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User u where u.id = :id", User.class)
-              .setParameter("id", id);
-      return query.getSingleResult();
+      Session session = sessionFactory.getCurrentSession();
+      return session.get(User.class, id);  // использование session.get() вместо запроса HQL
    }
 
 
@@ -42,7 +43,8 @@ public class DaoImpDB implements Dao {
    @SuppressWarnings("unchecked")
    @Transactional
    public List<User> getAll() {
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
+      Session session = sessionFactory.getCurrentSession();
+      TypedQuery<User> query = session.createQuery("from User", User.class);
       return query.getResultList();
    }
 
@@ -50,12 +52,19 @@ public class DaoImpDB implements Dao {
    @Override
    @Transactional
    public void update(User user) {
+      Session session = sessionFactory.getCurrentSession();
+      session.update(user); // обновляем существующую запись в базе данных
    }
 
 
    @Override
    @Transactional
    public void delete(int id) {
+      Session session = sessionFactory.getCurrentSession();
+      User user = session.get(User.class, id);  // сначала находим пользователя по id
+      if (user != null) {
+         session.delete(user); // если пользователь найден, удаляем его
+      }
    }
 }
 
