@@ -18,7 +18,7 @@
 
 ## Условие:
 
-Перейдем к созданию рабочего _web-приложения_. Все ключевые моменты были рассмотрены в предыдущих задачах.
+Перейдем к созданию рабочего _web_-приложения. Все ключевые моменты были рассмотрены в предыдущих задачах.
 
 Теперь вам требуется их сопоставить и связать в один проект.
 
@@ -33,13 +33,15 @@
 4. Конфигурация `Spring` через `{{JavaConfig }}` и аннотации, по аналогии 
 с предыдущими проектами. Без использования `xml`. Без `Spring Boot`.
 5. Внесите изменения в конфигурацию для работы с базой данных. 
-Вместо SessionFactory должен использоваться `EntityManager`.
+Вместо `SessionFactory` должен использоваться `EntityManager`.
 
 ## Ссылки:
 
-Статья на `habr.com` "[Spring изнутри. Этапы инициализации контекста](https://habr.com/ru/articles/222579/)"
+* Статья на `habr.com` "[Spring изнутри. Этапы инициализации контекста](https://habr.com/ru/articles/222579/)"
 
-Мануал на `baeldung.com` "[A Guide to JPA with Spring](https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa)"
+* Мануал на `baeldung.com` "[A Guide to JPA with Spring](https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa)"
+
+---
 
 ### Вложенные файлы
 
