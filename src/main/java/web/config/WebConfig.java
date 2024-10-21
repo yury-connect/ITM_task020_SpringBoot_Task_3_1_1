@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8"); // Я добавил кодировку для работы с русскими буквами
         return templateResolver;
     }
 
@@ -46,6 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8"); // БЕЗ ЭТОЙ СТРОЧКИ РУССКИЕ БУКВЫ НЕ ОТОБРАЖАЮТСЯ В БРАУЗЕРЕ !!!
         registry.viewResolver(resolver);
     }
 
