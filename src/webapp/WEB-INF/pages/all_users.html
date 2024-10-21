@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>All users</title>
+    </head>
+
+    <body>
+    <h1>All users:</h1>
+    <table border="3">
+        <tr>
+            <th style="width: 8%; background-color: lightcyan;">Id</th>
+            <th style="width: 20%; background-color: lightcyan;">User name</th>
+            <th style="width: 32%; background-color: lightcyan;">Full name</th>
+            <th style="width: 10%; background-color: lightcyan;">Date birth</th>
+            <th style="width: 10%; background-color: lightcyan;">View</th>
+            <th style="width: 10%; background-color: lightcyan;">Edit</th>
+            <th style="width: 10%; background-color: lightcyan;">Delete</th>
+        </tr>
+
+        <tr th:each="user : ${all_existing_users}">
+            <td style="text-align: center;" th:text="${user.getId()}">id</td>
+            <td style="text-align: left;" th:text="${user.getUserName()}">UserName</td>
+            <td style="text-align: left;" th:text="${user.getFullName()}">FullName</td>
+            <td style="text-align: center;" th:text="${user.getDateBirth()}">DateBirth</td>
+
+            <td style="text-align: center;"> <em> <a th:href="@{/users/view(id_viewed_user=${user.getId()})}">Viewing</a> </em> </td>
+            <td style="text-align: center;"> <em> <a th:href="@{/users/edit(id_edited_user=${user.getId()})}">Edit</a> </em> </td>
+            <td style="text-align: center;"> <em> <a th:href="@{/users/delete(id_removed_user=${user.getId()})}">Delete</a> </em> </td>
+        </tr>
+    </table>
+    <br/> <br/> <hr/> <br/>
+
+    <form th:method="GET" th:action="@{/users/create}">
+        <input type="submit" value="Add a new user"/>
+    </form>
+    <br/> <br/> <hr/> <br/>
+
+    <H3>Generating test user data for tables</H3>
+    <form action="#" th:action="@{/users/generate}" method="GET">
+        <label for="CountLabel">Enter the number of new users generated: </label>
+        <input type="number" id="CountLabel" name="count_generated_users" th:value="3" size="8" maxlength="6" required>
+        <button type="submit">Generate !</button>
+    </form>
+    <br/> <br/> <hr/> <br/>
+
+    <form th:method="POST" th:action="@{/users/delete_all}">
+        <input type="submit" value="Delete all user"/>
+    </form>
+    <br/> <br/>
+
+    </body>
+</html>
