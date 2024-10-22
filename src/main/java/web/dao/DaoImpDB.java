@@ -13,7 +13,6 @@ import java.util.List;
 @Repository("daoImpDB")
 public class DaoImpDB implements Dao {
 
-   // Используем EntityManager вместо SessionFactory
    @PersistenceContext
    private EntityManager entityManager;
 
@@ -22,13 +21,10 @@ public class DaoImpDB implements Dao {
    @Override
    @Transactional
    public void save(User user) {
-      // Используем EntityManager для сохранения объекта
       if (user.getId() == 0) {
-         // Для новых объектов используем persist()
-         entityManager.persist(user);
+         entityManager.persist(user); // Для новых объектов используем persist()
       } else {
-         // Для существующих объектов используем merge()
-         entityManager.merge(user);
+         entityManager.merge(user); // Для существующих объектов используем merge()
       }
    }
 
@@ -36,7 +32,6 @@ public class DaoImpDB implements Dao {
    @Override
    @Transactional
    public User getById(int id) {
-      // Используем EntityManager для получения объекта по ID
       return entityManager.find(User.class, id);
    }
 
@@ -45,7 +40,6 @@ public class DaoImpDB implements Dao {
    @SuppressWarnings("unchecked")
    @Transactional
    public List<User> getAll() {
-      // Используем HQL-запрос для получения всех объектов User
       TypedQuery<User> query = entityManager.createQuery("FROM User ORDER BY id ASC", User.class);
       return query.getResultList();
    }
@@ -54,7 +48,6 @@ public class DaoImpDB implements Dao {
    @Override
    @Transactional
    public void update(User user) {
-      // Используем EntityManager для обновления объекта
       entityManager.merge(user); // merge обновляет существующий объект в базе данных
    }
 
@@ -62,10 +55,8 @@ public class DaoImpDB implements Dao {
    @Override
    @Transactional
    public void delete(int id) {
-      // Находим объект перед удалением
       User user = entityManager.find(User.class, id);
       if (user != null) {
-         // Используем EntityManager для удаления объекта
          entityManager.remove(user);
       }
    }
