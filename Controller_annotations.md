@@ -2,11 +2,11 @@
 ### На стороне клиента - `Thumeleaf`. На стороне сервера - `Spring`.
 
 
-* @RequestParam используется для query-параметров (например, ?param=value).
-* @PathVariable — для параметров пути (например, /user/{id}).
-* @RequestBody — для получения тела запроса в виде объекта.
-* @ModelAttribute — для связывания данных формы с объектами.
-* @RequestHeader и @CookieValue — для работы с заголовками и куками.
+* **[@RequestParam](#@requestparam)** используется для query-параметров (например, ?param=value).
+* **[@PathVariable](#@pathvariable)** — для параметров пути (например, /user/{id}).
+* **[@RequestBody](@requestbody)** — для получения тела запроса в виде объекта.
+* **[@ModelAttribute](#modelattribute)** — для связывания данных формы с объектами.
+* **[@RequestHeader](#requestheader)** и **[@CookieValue](#cookievalue)** — для работы с заголовками и куками.
 
 
 
@@ -32,7 +32,9 @@ public String search(@RequestParam("query") String query, Model model) {
 }
 ```
 ##### Пример запроса: `/search?query=spring`
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 
 ---
@@ -53,8 +55,9 @@ public String getUserById(@PathVariable("id") int userId, Model model) {
 }
 ```
 ##### Пример запроса: `/user/1`
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @RequestBody
@@ -94,8 +97,9 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
     return ResponseEntity.ok("User created: " + user.getName());
 }
 ```
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @ModelAttribute
@@ -122,8 +126,9 @@ public String saveUser(@ModelAttribute User user, Model model) {
     return "userSaved";
 }
 ```
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @RequestHeader
@@ -153,8 +158,9 @@ public String getHeader(@RequestHeader("User-Agent") String userAgent, Model mod
     return "headerView";
 }
 ```
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @CookieValue
@@ -180,8 +186,9 @@ public String getCookie(@CookieValue(value = "sessionId", defaultValue = "none")
     return "cookieView";
 }
 ```
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @RequestPart
@@ -203,8 +210,9 @@ public String handleFileUpload(@RequestPart("file") MultipartFile file, Model mo
     return "uploadResult";
 }
 ```
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @SessionAttribute
@@ -224,8 +232,9 @@ public String getProfile(@SessionAttribute("user") User user, Model model) {
 }
 ```
 * Для корректной работы сессии, в контроллере должен быть ранее сохранён объект сессии **user**.
-  [Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 ---
 ## @MatrixVariable
@@ -245,8 +254,9 @@ public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String,
 }
 ```
 ##### Пример URL запроса: `/cars/1;color=red;brand=bmw`
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 
 
@@ -302,8 +312,9 @@ public class UserController {
     </body>
 </html>
 ```
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
-
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
 
 
 
@@ -354,7 +365,6 @@ public class SomeController {
 > * Контроллер обрабатывает запрос с помощью аннотации `@GetMapping` и выполняет необходимую логику.
 > * Результат отображается в соответствующем Thymeleaf-шаблоне.
 
-[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 <p align="right" style="color: gray;">
     <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
 </p>
