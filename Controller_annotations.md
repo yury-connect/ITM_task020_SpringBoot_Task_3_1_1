@@ -1,4 +1,4 @@
-## Аннотации для передачи параметров в контроллер. 
+# Аннотации для передачи параметров в контроллер. 
 ### На стороне клиента - Thumeleaf. На стороне сервера - Spring.
 
 
@@ -243,5 +243,109 @@ public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String,
 ```
 ##### Пример URL запроса: `/cars/1;color=red;brand=bmw`
 
+
+
+
+
 ---
+
+---
+# ПРИМЕРЫ
+
+## ССЫЛКА ДЛЯ ПЕРЕХОДА
+##### Клиентская часть (HTML с Thymeleaf:):
+На стороне клиента можно создать ссылку с динамическим параметром id, используя Thymeleaf следующим образом:
+```html
+<a th:href="@{'/user/' + ${user.id}}">Просмотреть пользователя</a>
+```
+Здесь `user.id` — это идентификатор, который мы передаем в ссылку, и _Thymeleaf_ динамически подставит его в _URL_. 
+Например, если `user.id = 123`, ссылка станет: `/user/123`.
+
+##### Контроллер на Spring MVC:
+В контроллере можно использовать аннотацию `@PathVariable` для захвата параметра `id` из URL:
+```java
+@Controller
+public class UserController {
+
+    @GetMapping("/user/{id}")
+    public String getUserById(@PathVariable Long id, Model model) {
+        // Логика для получения пользователя по id
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "user-details"; // Имя шаблона Thymeleaf для отображения деталей пользователя
+    }
+}
+```
+Здесь:
+* `@GetMapping("/user/{id}")` — контроллер обрабатывает GET-запросы по пути `/user/{id}`, 
+где `{id}` — это переменная, которую можно извлечь с помощью `@PathVariable`.
+* `@PathVariable Long id` — извлекаем переменную `id` из URL и передаем ее в метод контроллера.
+
+##### Thymeleaf-шаблон для отображения информации о пользователе:
+После того как контроллер получит id, он может извлечь данные о пользователе и отобразить их в шаблоне:
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Информация о пользователе</title>
+    </head>
+    <body>
+        <h1>Пользователь: <span th:text="${user.name}"></span></h1>
+        <p>Возраст: <span th:text="${user.age}"></span></p>
+        <p>Email: <span th:text="${user.email}"></span></p>
+    </body>
+</html>
+```
+
+
+
+
+
+---
+## КНОПКА ДЛЯ ПЕРЕХОДА
+##### HTML с Thymeleaf _(кнопка для перехода)_:
+На стороне клиента можно создать кнопку, которая при нажатии перенаправит пользователя на нужный метод контроллера:
+```html
+<form th:action="@{/someAction}" method="get">
+    <button type="submit">Перейти</button>
+</form>
+```
+Здесь:
+* `th:action="@{/someAction}"` — указывает URL для перенаправления (в данном случае, `/someAction`).
+* Метод отправки формы — `GET`, что соответствует обычному переходу по ссылке.
+
+##### Контроллер на Spring MVC:
+В контроллере можно использовать аннотацию `@GetMapping` для обработки этого запроса:
+```java
+@Controller
+public class SomeController {
+
+    @GetMapping("/someAction")
+    public String handleAction() {
+        // Логика метода контроллера
+        return "result-page"; // Имя Thymeleaf-шаблона, куда произойдет переход
+    }
+}
+```
+Здесь:
+* `@GetMapping("/someAction")` — обрабатывает GET-запрос по пути `/someAction`.
+* Внутри метода можно реализовать любую необходимую логику, а затем вернуть имя представления, например, `"result-page"`.
+
+##### Thymeleaf-шаблон для отображения результата:
+После того как контроллер выполнит свою логику, он может вернуть результат для отображения на соответствующей странице:
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Результат</title>
+    </head>
+    <body>
+        <h1>Вы успешно перешли по кнопке!</h1>
+    </body>
+</html>
+```
+> * Thymeleaf генерирует кнопку, которая вызывает GET-запрос на указанный URL.
+> * Контроллер обрабатывает запрос с помощью аннотации `@GetMapping` и выполняет необходимую логику.
+> * Результат отображается в соответствующем Thymeleaf-шаблоне.
+
 
