@@ -6,7 +6,6 @@ import web.dao.Dao;
 import web.model.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @org.springframework.stereotype.Service
