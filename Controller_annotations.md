@@ -8,10 +8,10 @@
 * @ModelAttribute — для связывания данных формы с объектами.
 * @RequestHeader и @CookieValue — для работы с заголовками и куками.
 
+
+
 ---
-
 ### @RequestParam
-
 Используется для извлечения **параметров из запроса**. Чаще всего применяется для обработки данных из строки запроса (например, query parameters).
 
 ##### Клиентская часть (_Thymeleaf_):
@@ -31,15 +31,13 @@ public String search(@RequestParam("query") String query, Model model) {
     return "searchResult";
 }
 ```
-
 ##### Пример запроса: `/search?query=spring`
 
+
+
 ---
-
 ### @PathVariable
-
 Используется для извлечения переменных из `URI` _(маршрута)_ // через **URL-путь**.
-
 
 ##### Клиентская часть (Thymeleaf):
 ```html
@@ -54,13 +52,12 @@ public String getUserById(@PathVariable("id") int userId, Model model) {
     return "userDetails";
 }
 ```
-
 ##### Пример запроса: `/user/1`
 
+
+
 ---
-
 ### @RequestBody
-
 Используется для передачи `JSON` или других данных в теле запроса. Для отправки `JSON` с помощью `HTML`-форм потребуется `JavaScript`.
 
 ##### Клиентская часть (JavaScript для отправки JSON):
@@ -98,12 +95,11 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
 }
 ```
 
+
+
 ---
-
 ### @ModelAttribute
-
 Используется для привязки полей `HTML`-форм к объектам. Обычно применяется для работы с формами.
-
 
 ##### Клиентская часть (Thymeleaf):
 ```html
@@ -127,10 +123,10 @@ public String saveUser(@ModelAttribute User user, Model model) {
 }
 ```
 
+
+
 ---
-
 ### @RequestHeader
-
 Используется для передачи данных через заголовки HTTP-запроса.
 
 ##### Клиентская часть (JavaScript для отправки заголовка):
@@ -158,12 +154,10 @@ public String getHeader(@RequestHeader("User-Agent") String userAgent, Model mod
 }
 ```
 
+
 ---
-
 ### @CookieValue
-
 Используется для получения данных **из куки**.
-
 
 ##### Клиентская часть (JavaScript для установки куки):
 ```html
@@ -186,12 +180,10 @@ public String getCookie(@CookieValue(value = "sessionId", defaultValue = "none")
 }
 ```
 
+
 ---
-
 ### @RequestPart
-
 Используется для обработки части `multipart`-запроса, например, для загрузки файлов.
-
 
 ##### Клиентская часть (Thymeleaf):
 ```html
@@ -210,10 +202,9 @@ public String handleFileUpload(@RequestPart("file") MultipartFile file, Model mo
 }
 ```
 
+
 ---
-
 ### @SessionAttribute
-
 Используется для извлечения данных **из сессии** пользователя.
 
 ##### Клиентская часть (Thymeleaf):
@@ -231,8 +222,10 @@ public String getProfile(@SessionAttribute("user") User user, Model model) {
 ```
 * Для корректной работы сессии, в контроллере должен быть ранее сохранён объект сессии **user**.
 
+
+
 ---
-### @MatrixVariable
+## @MatrixVariable
 Используется для передачи данных через матричные параметры в URL.
 
 ##### Клиентская часть (Thymeleaf):
