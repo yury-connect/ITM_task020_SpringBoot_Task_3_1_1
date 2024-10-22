@@ -38,12 +38,13 @@ public  class UserUtils {
         Faker faker = new Faker(new Locale("ru"));
         Transliterator transliterator = Transliterator.getInstance("Russian-Latin/BGN");   // Создание транслитератора
 
-        String fullName = faker.name().fullName(); // Генерируем полное имя пользователя
+        String fullName = transliterator.transliterate(faker.name().fullName()); // Генерируем полное имя пользователя
 
         String[] partsUserName = fullName.split(" "); // Разделяем полное имя на части (по пробелам)
         String firstUserName = partsUserName[1].toLowerCase(Locale.ENGLISH); // Имя
         String lastUserName = partsUserName[0].toLowerCase(Locale.ENGLISH);  // Фамилия
-        String userName = transliterator.transliterate(firstUserName + "." + lastUserName); // Генерируем userName на основе полного имени
+//        String userName = transliterator.transliterate(firstUserName + "." + lastUserName); // Генерируем userName на основе полного имени
+        String userName = firstUserName + "." + lastUserName; // Генерируем userName на основе полного имени
 
         String email = faker.internet().emailAddress(userName);
 
@@ -52,7 +53,7 @@ public  class UserUtils {
         final LocalDate startDate = LocalDate.of(1970, 1, 1);
         final LocalDate endDate = LocalDate.of(2024, 10, 1);
         Date dateBirth = Date.valueOf(generateRandomDate(startDate, endDate));
-        String address = faker.address().fullAddress();
+        String address = transliterator.transliterate(faker.address().fullAddress());
 
         return User.builder()
                 .id(-1)
