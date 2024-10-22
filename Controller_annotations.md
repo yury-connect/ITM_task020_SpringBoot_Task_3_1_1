@@ -32,8 +32,7 @@ public String search(@RequestParam("query") String query, Model model) {
 }
 ```
 ##### Пример запроса: `/search?query=spring`
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -54,8 +53,7 @@ public String getUserById(@PathVariable("id") int userId, Model model) {
 }
 ```
 ##### Пример запроса: `/user/1`
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -96,8 +94,7 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
     return ResponseEntity.ok("User created: " + user.getName());
 }
 ```
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -125,8 +122,7 @@ public String saveUser(@ModelAttribute User user, Model model) {
     return "userSaved";
 }
 ```
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -157,8 +153,7 @@ public String getHeader(@RequestHeader("User-Agent") String userAgent, Model mod
     return "headerView";
 }
 ```
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -185,8 +180,7 @@ public String getCookie(@CookieValue(value = "sessionId", defaultValue = "none")
     return "cookieView";
 }
 ```
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -209,8 +203,7 @@ public String handleFileUpload(@RequestPart("file") MultipartFile file, Model mo
     return "uploadResult";
 }
 ```
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -231,8 +224,7 @@ public String getProfile(@SessionAttribute("user") User user, Model model) {
 }
 ```
 * Для корректной работы сессии, в контроллере должен быть ранее сохранён объект сессии **user**.
-  [<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+  [Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 ---
@@ -253,8 +245,7 @@ public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String,
 }
 ```
 ##### Пример URL запроса: `/cars/1;color=red;brand=bmw`
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 
@@ -311,8 +302,7 @@ public class UserController {
     </body>
 </html>
 ```
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
 
 
 
@@ -364,5 +354,7 @@ public class SomeController {
 > * Контроллер обрабатывает запрос с помощью аннотации `@GetMapping` и выполняет необходимую логику.
 > * Результат отображается в соответствующем Thymeleaf-шаблоне.
 
-[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
-
+[Перейти в начало](#аннотации-для-передачи-параметров-в-контроллер)
+<p align="right" style="color: gray;">
+    <a href="#аннотации-для-передачи-параметров-в-контроллер">Перейти в начало</a>
+</p>
