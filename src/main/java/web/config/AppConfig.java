@@ -31,7 +31,7 @@ public class AppConfig {
 
 
    @Bean
-   public DataSource dataSource() {
+   public DataSource dataSource() { // Настройка пула соединений с использованием Apache Commons DBCP
       BasicDataSource dataSource = new BasicDataSource();
       dataSource.setDriverClassName(env.getProperty("db.driver"));
       dataSource.setUrl(env.getProperty("db.url"));
@@ -51,8 +51,8 @@ public class AppConfig {
       factoryBean.setPackagesToScan("web.model"); // Сканируем пакет с сущностями
 
       HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-      vendorAdapter.setShowSql(true);
-      vendorAdapter.setGenerateDdl(false); // отключаем автоматическое создание схемы, если это не нужно
+//      vendorAdapter.setShowSql(true);
+//      vendorAdapter.setGenerateDdl(false); // отключаем автоматическое создание схемы, если это не нужно
       factoryBean.setJpaVendorAdapter(vendorAdapter);
 
       Properties jpaProperties = new Properties();
@@ -68,8 +68,10 @@ public class AppConfig {
 
 
 
-   @Bean  // Транзакционный менеджер
-   public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-      return new JpaTransactionManager(emf);
+   @Bean // Настройка менеджера транзакций
+   public JpaTransactionManager transactionManager() {
+      JpaTransactionManager transactionManager = new JpaTransactionManager();
+      transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+      return transactionManager;
    }
 }
