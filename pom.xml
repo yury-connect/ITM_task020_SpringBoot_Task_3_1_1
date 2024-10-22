@@ -36,7 +36,75 @@
             <version>3.0.14.RELEASE</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <!--			<version>2.2.2</version>-->
+            <version>1.8.0</version>
+        </dependency>
+
+<!--        для объекта Transliterator-->
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>70.1</version>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>5.3.14</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.6.3.Final</version>
+        </dependency>
+
+        <!--        Пока не использую / отключаю-->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version>
+        </dependency>
+
+<!--        org.apache.commons.dbcp2.BasicDataSource — это класс, предоставляемый библиотекой
+Apache Commons DBCP (Database Connection Pooling). Она используется для управления пулами соединений с базой данных.
+Пул соединений позволяет повторно использовать уже открытые соединения с базой данных, что значительно улучшает
+производительность приложений, особенно при большом количестве запросов к базе данных.
+   BasicDataSource автоматически управляет пулом соединений. Вместо того, чтобы открывать новое соединение каждый раз,
+приложение использует заранее установленные соединения, которые хранятся в пуле.
+   Это улучшает производительность и снижает нагрузку на базу данных и сервер.   -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.9.0</version> <!-- Версию можно обновить до актуальной, если есть более новая -->
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <pluginManagement>
