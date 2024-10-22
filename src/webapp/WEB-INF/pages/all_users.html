@@ -32,7 +32,7 @@
     <br/> <br/> <hr/> <br/>
 
     <form th:method="GET" th:action="@{/users/create}">
-        <input type="submit" value="Add a new user"/>
+        <input type="submit" value="-= Add a new user =-"/>
     </form>
     <br/> <br/> <hr/> <br/>
 
@@ -40,12 +40,13 @@
     <form action="#" th:action="@{/users/generate}" method="GET">
         <label for="CountLabel">Enter the number of new users generated: </label>
         <input type="number" id="CountLabel" name="count_generated_users" th:value="3" size="8" maxlength="6" required>
-        <button type="submit">Generate !</button>
+        <button type="submit">-= Generate! =-</button>
     </form>
     <br/> <br/> <hr/> <br/>
 
     <form th:method="POST" th:action="@{/users/delete_all}">
-        <input type="submit" value="Delete all user"/>
+        <input type="hidden" name="_method" value="DELETE"/>
+        <input type="submit" value="-= Delete all user =-"/>
     </form>
     <br/> <br/>
 

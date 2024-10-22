@@ -8,7 +8,7 @@
     <body>
         <h1>Edit user:</h1>
 
-        <form th:action="@{/users/edit}" th:object="${edited_user}" method="POST">
+        <form th:action="@{/users/edit}" th:object="${edited_user}" method="POST" accept-charset="UTF-8">
             <input type="hidden" th:field="*{id}">
 
             <label for="user_id_label">Id:</label>
@@ -47,13 +47,13 @@
                         <br/>
                     </td>
                     <td style = "width: 200px; text-align: center;">
-                        <form method="GET" th:action="@{/users/delete}" >
+                        <form method="GET" th:action="@{/users/delete}" accept-charset="UTF-8">
                             <input type="hidden" name="id_removed_user" th:value="${edited_user.getId()}" />
                             <input type="submit" value="-= Delete =-"/>
                         </form>
                     </td>
                     <td style = "width: 200px; text-align: center;">
-                        <form th:method="GET" th:action="@{/users/all}">
+                        <form th:method="GET" th:action="@{/users/all}" accept-charset="UTF-8">
                             <input type="submit" value="-= Cancel =-"/>
                         </form>
                     </td>

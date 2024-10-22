@@ -26,77 +26,14 @@ public class Controller {
 
 
 
+    // GET: Генерация пользователей (не изменяет существующих данных, просто вызывает логику)
     @GetMapping("/generate")
     public String generateUsers(@RequestParam(name = "count_generated_users", required = false, defaultValue = "1") Integer count) {
-        System.out.println("generateUsers " + count); // ****************************   УДАЛИТЬ   ****************************
         UserUtils.generateUsers(count).stream().forEach(usr -> service.save(usr));
         return "redirect:/users/all";
     }
 
-
-    @GetMapping("/all")
-    public String showAllPage(Model model) {
-        model.addAttribute("all_existing_users", service.getAll());
-
-        System.out.println("showAllPage "); // ****************************   УДАЛИТЬ   ****************************
-        service.getAll().stream().forEach(System.out::println); // ****************************   УДАЛИТЬ   ****************************
-
-        return "all_users";
-    }
-
-    @GetMapping("/view")
-    public String showUserPage(@RequestParam("id_viewed_user") Integer id, Model model) {
-        model.addAttribute("viewed_user", service.getById(id));
-
-        System.out.println("showUserPage "); // ****************************   УДАЛИТЬ   ****************************
-        System.out.println("viewed_user = " + service.getById(id)); // ****************************   УДАЛИТЬ   ****************************
-
-        return "view_user_page";
-    }
-
-
-
-
-
-
-
-
-
-
-
-    @GetMapping("/delete")
-    public String showDeleteUsersPage(@RequestParam("id_removed_user") Integer id, Model model) {
-        model.addAttribute("removed_user", service.getById(id));
-        return "delete_user_page";
-    }
-    @PostMapping("/delete")
-    public String deleteUsers(@RequestParam(name = "id_removed_user") Integer id) {
-        service.delete(id);
-        return "redirect:/users/all";
-    }
-    @PostMapping("/delete_all")
-    public String deleteAllUsers() {
-        List<User> deleteUsersList = new ArrayList<>(service.getAll());
-        deleteUsersList.forEach(usr -> service.delete(usr.getId()));
-        return "redirect:/users/all";
-    }
-
-
-    @GetMapping("/edit")
-    public String showEditUsersPage(@RequestParam("id_edited_user") Integer id, Model model) {
-        model.addAttribute("edited_user", service.getById(id));
-
-        System.out.println("showEditUsersPage : " + service.getById(id)); // ****************************   УДАЛИТЬ   ****************************
-
-        return "update_user_page";
-    }
-    @PostMapping("/edit")
-    public String editUsers(@ModelAttribute("edited_user") User user) {
-        service.update(user);
-        return "redirect:/users/all";
-    }
-
-
+    // GET: Отображение страницы создания пользователя
     @GetMapping("/create")
     public String showCreateUsersPage(Model model) {
         User defaultUser = UserUtils.generateUser();
@@ -111,6 +48,8 @@ public class Controller {
         model.addAttribute("created_user", defaultUser);
         return "create_user_page";
     }
+
+    // POST: Создание нового пользователя (следует использовать POST для создания новых записей)
     @PostMapping("/create")
     public String createUser(@ModelAttribute("created_user") User user) {
         service.save(user);
@@ -118,9 +57,60 @@ public class Controller {
     }
 
 
-//    @PostMapping("/generate")
-//    public String generateUsers(@ModelAttribute("car_count") Integer count) {
-//        UserUtils.generateCar(count).stream().forEach(car -> service.save(car));
-//        return "redirect:/cars";
-//    }
+
+    // GET: Отображение всех пользователей
+    @GetMapping("/all")
+    public String showAllPage(Model model) {
+        model.addAttribute("all_existing_users", service.getAll());
+        return "all_users";
+    }
+
+
+
+    // GET: Просмотр информации о конкретном пользователе
+    @GetMapping("/view")
+    public String showUserPage(@RequestParam("id_viewed_user") Integer id, Model model) {
+        model.addAttribute("viewed_user", service.getById(id));
+        return "view_user_page";
+    }
+
+
+
+    // GET: Отображение страницы редактирования пользователя
+    @GetMapping("/edit")
+    public String showEditUsersPage(@RequestParam("id_edited_user") Integer id, Model model) {
+        model.addAttribute("edited_user", service.getById(id));
+        return "update_user_page";
+    }
+
+    // PUT: Обновление данных пользователя (используем PUT для обновления)
+    @PostMapping("/edit")
+    public String editUsers(@ModelAttribute("edited_user") User user) {
+        service.update(user);
+        return "redirect:/users/all";
+    }
+
+
+
+    // GET: Отображение страницы для подтверждения удаления пользователя
+    @GetMapping("/delete")
+    public String showDeleteUsersPage(@RequestParam("id_removed_user") Integer id, Model model) {
+        model.addAttribute("removed_user", service.getById(id));
+        return "delete_user_page";
+    }
+
+    // DELETE: Удаление пользователя (следует использовать DELETE)
+    @PostMapping("/delete")
+    public String deleteUsers(@RequestParam(name = "id_removed_user") Integer id) {
+        service.delete(id);
+        return "redirect:/users/all";
+    }
+
+    // DELETE: Удаление всех пользователей (следует использовать DELETE)
+    @PostMapping("/delete_all")
+    public String deleteAllUsers() {
+        List<User> deleteUsersList = new ArrayList<>(service.getAll());
+        deleteUsersList.forEach(usr -> service.delete(usr.getId()));
+        return "redirect:/users/all";
+    }
 }
