@@ -18,6 +18,7 @@ public class UserDaoImplList implements UserDao {
 
     public UserDaoImplList() {
         this.users = new ArrayList<>();
+        this.counterId = 1; // Начинаем с 1, чтобы IDs были последовательны
     }
 
 
@@ -29,28 +30,33 @@ public class UserDaoImplList implements UserDao {
 
     @Override
     public User getById(int id) {
-        User user = users.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
-        return user;
+        return users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null); // Если не найдено, возвращаем null
     }
 
     @Override
     public List<User> getAll() {
-        return users;
+        return new ArrayList<>(users); // Возвращаем копию списка для безопасности
     }
 
     @Override
     public void update(User user) {
-        User updated = users.stream().filter(item -> item.getId() == user.getId()).findFirst().get();
-        updated.setUserName(user.getUserName());
-        updated.setPassword(user.getPassword());
-        updated.setEmail(user.getEmail());
-        updated.setFullName(user.getFullName());
-        updated.setDateBirth(user.getDateBirth());
-        updated.setAddress(user.getAddress());
+        User existingUser = getById(user.getId()); // Находим существующего пользователя
+        if (existingUser != null) {
+            // Обновляем поля, если пользователь найден
+            existingUser.setUserName(user.getUserName());
+            existingUser.setPassword(user.getPassword());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setFullName(user.getFullName());
+            existingUser.setDateBirth(user.getDateBirth());
+            existingUser.setAddress(user.getAddress());
+        }
     }
 
     @Override
     public void delete(int id) {
-        users.removeIf(c -> c.getId() == id); // удаляет все элементы, удовлетворяющие условию
+        users.removeIf(user -> user.getId() == id); // Удаляем пользователя по ID
     }
 }
