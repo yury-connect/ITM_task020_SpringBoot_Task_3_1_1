@@ -14,7 +14,7 @@
 
 Используется для извлечения **параметров из запроса**. Чаще всего применяется для обработки данных из строки запроса (например, query parameters).
 
-##### Клиентская часть (Thymeleaf):
+##### Клиентская часть (_Thymeleaf_):
 ```html
 <form th:action="@{/search}" method="get">
     <label for="query">Search Query:</label>
@@ -34,87 +34,157 @@ public String search(@RequestParam("query") String query, Model model) {
 
 ##### Пример запроса: `/search?query=spring`
 
-* В этом примере параметр `query` будет извлечен из строки запроса, например: `/search?query=spring`.
-
 ---
 
 ### @PathVariable
 
-Используется для извлечения переменных из `URI` _(маршрута)_.
+Используется для извлечения переменных из `URI` _(маршрута)_ // через **URL-путь**.
 
+
+##### Клиентская часть (Thymeleaf):
+```html
+<a th:href="@{/user/1}">View User</a>
 ```
+
+##### Контроллер:
+```java
 @GetMapping("/user/{id}")
-public String getUserById(@PathVariable("id") int userId) {
-// Используем userId для поиска пользователя
-return "user";
+public String getUserById(@PathVariable("id") int userId, Model model) {
+    model.addAttribute("user", "User ID: " + userId);
+    return "userDetails";
 }
 ```
 
-* Переменная id будет извлечена из пути `/user/1`, где `1` — это значение переменной `id`.
+##### Пример запроса: `/user/1`
 
 ---
 
 ### @RequestBody
 
-Используется для получения тела HTTP-запроса (`JSON`, `XML` и т.д.) и преобразования его **в объект**.
+Используется для передачи `JSON` или других данных в теле запроса. Для отправки `JSON` с помощью `HTML`-форм потребуется `JavaScript`.
 
+##### Клиентская часть (JavaScript для отправки JSON):
+```html
+<form id="userForm">
+    <input type="text" id="name" name="name" placeholder="Name">
+    <input type="email" id="email" name="email" placeholder="Email">
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<script>
+function submitForm() {
+    const user = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value
+    };
+
+    fetch('/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }).then(response => response.json()).then(data => console.log(data));
+}
+</script>
 ```
+
+##### Контроллер:
+```java
 @PostMapping("/users")
-public String createUser(@RequestBody User user) {
-    // Создаем пользователя на основе данных из JSON
-    return "userCreated";
+public ResponseEntity<String> createUser(@RequestBody User user) {
+    // Сохранить пользователя
+    return ResponseEntity.ok("User created: " + user.getName());
 }
 ```
-
-* Spring автоматически преобразует JSON в объект User.
 
 ---
 
 ### @ModelAttribute
 
-Используется для привязки полей HTML-форм к объектам. Обычно применяется для работы с формами.
+Используется для привязки полей `HTML`-форм к объектам. Обычно применяется для работы с формами.
 
+
+##### Клиентская часть (Thymeleaf):
+```html
+<form th:action="@{/user/save}" th:object="${user}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}">
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}">
+    
+    <button type="submit">Save</button>
+</form>
 ```
+
+##### Контроллер:
+```java
 @PostMapping("/user/save")
-public String saveUser(@ModelAttribute User user) {
-    // Данные формы будут маппированы на объект user
+public String saveUser(@ModelAttribute User user, Model model) {
+    model.addAttribute("message", "User saved: " + user.getName());
     return "userSaved";
 }
-
 ```
-* Поля формы, такие как `name`, `email`, будут автоматически привязаны к полям объекта `User`.
 
 ---
 
 ### @RequestHeader
 
-Используется для извлечения данных из HTTP-заголовков запроса.
+Используется для передачи данных через заголовки HTTP-запроса.
 
+##### Клиентская часть (JavaScript для отправки заголовка):
+```html
+<button onclick="sendRequest()">Send Request</button>
+
+<script>
+function sendRequest() {
+    fetch('/header', {
+        method: 'GET',
+        headers: {
+            'User-Agent': 'MyCustomUserAgent'
+        }
+    }).then(response => response.text()).then(data => console.log(data));
+}
+</script>
 ```
+
+##### Контроллер:
+```java
 @GetMapping("/header")
-public String getHeader(@RequestHeader("User-Agent") String userAgent) {
-// Используем информацию из заголовка User-Agent
-return "header";
+public String getHeader(@RequestHeader("User-Agent") String userAgent, Model model) {
+    model.addAttribute("header", "User-Agent: " + userAgent);
+    return "headerView";
 }
 ```
-
-* Аннотация извлекает значение заголовка `User-Agent`.
 
 ---
 
 ### @CookieValue
 
-Используется для получения данных из куки.
+Используется для получения данных **из куки**.
 
+
+##### Клиентская часть (JavaScript для установки куки):
+```html
+<button onclick="setCookie()">Set Cookie</button>
+
+<script>
+function setCookie() {
+    document.cookie = "sessionId=abc123; path=/";
+    window.location.href = "/cookie";
+}
+</script>
 ```
+
+##### Контроллер:
+```java
 @GetMapping("/cookie")
-public String getCookie(@CookieValue(value = "sessionId", defaultValue = "defaultSession") String sessionId) {
-    // Работа с кукой sessionId
-    return "cookie";
+public String getCookie(@CookieValue(value = "sessionId", defaultValue = "none") String sessionId, Model model) {
+    model.addAttribute("cookie", "Session ID: " + sessionId);
+    return "cookieView";
 }
 ```
-
-* Извлекает значение куки `sessionId`.
 
 ---
 
@@ -122,49 +192,63 @@ public String getCookie(@CookieValue(value = "sessionId", defaultValue = "defaul
 
 Используется для обработки части `multipart`-запроса, например, для загрузки файлов.
 
-```
-@PostMapping("/upload")
-public String handleFileUpload(@RequestPart("file") MultipartFile file) {
-    // Работа с файлом
-    return "uploadSuccess";
-}
+
+##### Клиентская часть (Thymeleaf):
+```html
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">Upload</button>
+</form>
 ```
 
-* Используется для получения файла из multipart-запроса.
+##### Контроллер:
+```java
+@PostMapping("/upload")
+public String handleFileUpload(@RequestPart("file") MultipartFile file, Model model) {
+    model.addAttribute("message", "File uploaded: " + file.getOriginalFilename());
+    return "uploadResult";
+}
+```
 
 ---
 
 ### @SessionAttribute
 
-Используется для извлечения данных из сессии пользователя.
+Используется для извлечения данных **из сессии** пользователя.
 
+##### Клиентская часть (Thymeleaf):
+```html
+<a th:href="@{/profile}">View Profile</a>
 ```
+
+##### Контроллер:
+```java
 @GetMapping("/profile")
-public String getProfile(@SessionAttribute("user") User user) {
-    // Извлекаем объект пользователя из сессии
+public String getProfile(@SessionAttribute("user") User user, Model model) {
+    model.addAttribute("user", user);
     return "profile";
 }
 ```
-
-* Извлекает значение атрибута `user` из сессии.
+* Для корректной работы сессии, в контроллере должен быть ранее сохранён объект сессии **user**.
 
 ---
-
 ### @MatrixVariable
+Используется для передачи данных через матричные параметры в URL.
 
-Используется для извлечения переменных матричных параметров, которые могут быть использованы в `URI`.
-
+##### Клиентская часть (Thymeleaf):
+```html
+<a th:href="@{/cars/1;color=red;brand=bmw}">View Car</a>
 ```
+
+##### Контроллер:
+```java
 @GetMapping("/cars/{id}")
-public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String, String> filters) {
-    // Пример URI: /cars/1;color=red;brand=bmw
+public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String, String> filters, Model model) {
+    model.addAttribute("filters", filters);
     return "carDetails";
 }
-
 ```
+##### Пример URL запроса: `/cars/1;color=red;brand=bmw`
 
 ---
 
-### 
-
----
