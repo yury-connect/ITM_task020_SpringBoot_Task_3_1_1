@@ -2,11 +2,11 @@
 ### На стороне клиента - `Thumeleaf`. На стороне сервера - `Spring`.
 
 
-* **[@RequestParam](#@requestparam)** используется для query-параметров (например, ?param=value).
-* **[@PathVariable](#@pathvariable)** — для параметров пути (например, /user/{id}).
-* **[@RequestBody](#@requestbody)** — для получения тела запроса в виде объекта.
-* **[@ModelAttribute](#@modelattribute)** — для связывания данных формы с объектами.
-* **[@RequestHeader](#@requestheader)** и **[@CookieValue](#@cookievalue)** — для работы с заголовками и куками.
+* **[@RequestParam](#requestparam)** используется для query-параметров (например, ?param=value).
+* **[@PathVariable](#pathvariable)** — для параметров пути (например, /user/{id}).
+* **[@RequestBody](#requestbody)** — для получения тела запроса в виде объекта.
+* **[@ModelAttribute](#modelattribute)** — для связывания данных формы с объектами.
+* **[@RequestHeader](#requestheader)** и **[@CookieValue](#cookievalue)** — для работы с заголовками и куками.
 
 
 
