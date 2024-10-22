@@ -15,7 +15,7 @@
 Используется для извлечения **параметров из запроса**. Чаще всего применяется для обработки данных из строки запроса (например, query parameters).
 
 ##### Клиентская часть (Thymeleaf):
-```
+```html
 <form th:action="@{/search}" method="get">
     <label for="query">Search Query:</label>
     <input type="text" id="query" name="query">
@@ -24,7 +24,7 @@
 ```
 
 ##### Контроллер:
-```
+```java
 @GetMapping("/search")
 public String search(@RequestParam("query") String query, Model model) {
     model.addAttribute("result", "Result for query: " + query);
