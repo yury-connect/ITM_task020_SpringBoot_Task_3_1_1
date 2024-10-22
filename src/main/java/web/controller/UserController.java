@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
-import web.service.Service;
+import web.service.UserService;
 import web.util.UserUtils;
 
 import java.sql.Date;
@@ -14,13 +14,13 @@ import java.util.List;
 
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/users")
-public class Controller {
+public class UserController {
 
-    private Service service;
+    private UserService service;
 
 
     @Autowired
-    public Controller(Service service) {
+    public UserController(UserService service) {
         this.service = service;
     }
 

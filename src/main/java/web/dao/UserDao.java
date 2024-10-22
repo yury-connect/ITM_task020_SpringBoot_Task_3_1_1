@@ -1,11 +1,11 @@
-package web.service;
+package web.dao;
 
 import web.model.User;
 
 import java.util.List;
 
 
-public interface Service {
+public interface UserDao {
 
     void save(User user);
 

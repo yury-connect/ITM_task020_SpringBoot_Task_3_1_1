@@ -10,13 +10,13 @@ import java.util.List;
 
 @Repository("daoImplList")
 @Primary // Этот бин будет использоваться по умолчанию, если не указано иное
-public class DaoImplList implements Dao {
+public class UserDaoImplList implements UserDao {
 
     private List<User> users;
     private int counterId;
 
 
-    public DaoImplList() {
+    public UserDaoImplList() {
         this.users = new ArrayList<>();
     }
 
