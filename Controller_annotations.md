@@ -1,5 +1,5 @@
 # Аннотации для передачи параметров в контроллер. 
-### На стороне клиента - Thumeleaf. На стороне сервера - Spring.
+### На стороне клиента - `Thumeleaf`. На стороне сервера - `Spring`.
 
 
 * @RequestParam используется для query-параметров (например, ?param=value).
@@ -11,7 +11,7 @@
 
 
 ---
-## @RequestParam
+## <span style="color: blue;">@RequestParam</span>
 Используется для извлечения **параметров из запроса**. Чаще всего применяется для обработки данных из строки запроса (например, query parameters).
 
 ##### Клиентская часть (_Thymeleaf_):
@@ -32,6 +32,7 @@ public String search(@RequestParam("query") String query, Model model) {
 }
 ```
 ##### Пример запроса: `/search?query=spring`
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
@@ -53,6 +54,7 @@ public String getUserById(@PathVariable("id") int userId, Model model) {
 }
 ```
 ##### Пример запроса: `/user/1`
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
@@ -94,6 +96,7 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
     return ResponseEntity.ok("User created: " + user.getName());
 }
 ```
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
@@ -122,6 +125,7 @@ public String saveUser(@ModelAttribute User user, Model model) {
     return "userSaved";
 }
 ```
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
@@ -153,6 +157,8 @@ public String getHeader(@RequestHeader("User-Agent") String userAgent, Model mod
     return "headerView";
 }
 ```
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
+
 
 
 ---
@@ -179,6 +185,8 @@ public String getCookie(@CookieValue(value = "sessionId", defaultValue = "none")
     return "cookieView";
 }
 ```
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
+
 
 
 ---
@@ -201,6 +209,8 @@ public String handleFileUpload(@RequestPart("file") MultipartFile file, Model mo
     return "uploadResult";
 }
 ```
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
+
 
 
 ---
@@ -221,6 +231,7 @@ public String getProfile(@SessionAttribute("user") User user, Model model) {
 }
 ```
 * Для корректной работы сессии, в контроллере должен быть ранее сохранён объект сессии **user**.
+  [<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
@@ -242,10 +253,13 @@ public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String,
 }
 ```
 ##### Пример URL запроса: `/cars/1;color=red;brand=bmw`
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
 
+
+---
 
 ---
 
@@ -253,15 +267,16 @@ public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String,
 # ПРИМЕРЫ
 
 ## ССЫЛКА ДЛЯ ПЕРЕХОДА
-##### Клиентская часть (HTML с Thymeleaf:):
+### Клиентская часть (HTML с Thymeleaf:):
 На стороне клиента можно создать ссылку с динамическим параметром id, используя Thymeleaf следующим образом:
 ```html
 <a th:href="@{'/user/' + ${user.id}}">Просмотреть пользователя</a>
 ```
-Здесь `user.id` — это идентификатор, который мы передаем в ссылку, и _Thymeleaf_ динамически подставит его в _URL_. 
+Здесь 
+>  * `user.id` — это идентификатор, который мы передаем в ссылку, и _Thymeleaf_ динамически подставит его в _URL_. 
 Например, если `user.id = 123`, ссылка станет: `/user/123`.
 
-##### Контроллер на Spring MVC:
+### Контроллер на Spring MVC:
 В контроллере можно использовать аннотацию `@PathVariable` для захвата параметра `id` из URL:
 ```java
 @Controller
@@ -277,11 +292,11 @@ public class UserController {
 }
 ```
 Здесь:
-* `@GetMapping("/user/{id}")` — контроллер обрабатывает GET-запросы по пути `/user/{id}`, 
+> * `@GetMapping("/user/{id}")` — контроллер обрабатывает GET-запросы по пути `/user/{id}`, 
 где `{id}` — это переменная, которую можно извлечь с помощью `@PathVariable`.
-* `@PathVariable Long id` — извлекаем переменную `id` из URL и передаем ее в метод контроллера.
+> * `@PathVariable Long id` — извлекаем переменную `id` из URL и передаем ее в метод контроллера.
 
-##### Thymeleaf-шаблон для отображения информации о пользователе:
+### Thymeleaf-шаблон для отображения информации о пользователе:
 После того как контроллер получит id, он может извлечь данные о пользователе и отобразить их в шаблоне:
 ```html
 <!DOCTYPE html>
@@ -296,6 +311,7 @@ public class UserController {
     </body>
 </html>
 ```
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
 
 
@@ -303,7 +319,7 @@ public class UserController {
 
 ---
 ## КНОПКА ДЛЯ ПЕРЕХОДА
-##### HTML с Thymeleaf _(кнопка для перехода)_:
+### HTML с Thymeleaf _(кнопка для перехода)_:
 На стороне клиента можно создать кнопку, которая при нажатии перенаправит пользователя на нужный метод контроллера:
 ```html
 <form th:action="@{/someAction}" method="get">
@@ -311,10 +327,10 @@ public class UserController {
 </form>
 ```
 Здесь:
-* `th:action="@{/someAction}"` — указывает URL для перенаправления (в данном случае, `/someAction`).
-* Метод отправки формы — `GET`, что соответствует обычному переходу по ссылке.
+> * `th:action="@{/someAction}"` — указывает URL для перенаправления (в данном случае, `/someAction`).
+> * Метод отправки формы — `GET`, что соответствует обычному переходу по ссылке.
 
-##### Контроллер на Spring MVC:
+### Контроллер на Spring MVC:
 В контроллере можно использовать аннотацию `@GetMapping` для обработки этого запроса:
 ```java
 @Controller
@@ -328,10 +344,10 @@ public class SomeController {
 }
 ```
 Здесь:
-* `@GetMapping("/someAction")` — обрабатывает GET-запрос по пути `/someAction`.
-* Внутри метода можно реализовать любую необходимую логику, а затем вернуть имя представления, например, `"result-page"`.
+> * `@GetMapping("/someAction")` — обрабатывает GET-запрос по пути `/someAction`.
+> * Внутри метода можно реализовать любую необходимую логику, а затем вернуть имя представления, например, `"result-page"`.
 
-##### Thymeleaf-шаблон для отображения результата:
+### Thymeleaf-шаблон для отображения результата:
 После того как контроллер выполнит свою логику, он может вернуть результат для отображения на соответствующей странице:
 ```html
 <!DOCTYPE html>
@@ -348,4 +364,5 @@ public class SomeController {
 > * Контроллер обрабатывает запрос с помощью аннотации `@GetMapping` и выполняет необходимую логику.
 > * Результат отображается в соответствующем Thymeleaf-шаблоне.
 
+[<p align="right" style="color: gray;"> Перейти в начало</p>](Аннотации для передачи параметров в контроллер.)
 
