@@ -7,6 +7,11 @@
 * **[@RequestBody](#requestbody)** — для получения тела запроса в виде объекта.
 * **[@ModelAttribute](#modelattribute)** — для связывания данных формы с объектами.
 * **[@RequestHeader](#requestheader)** и **[@CookieValue](#cookievalue)** — для работы с заголовками и куками.
+* **[@RequestPart](#requestpart)** —
+* **[@SessionAttribute](#sessionattribute)** —
+* **[@MatrixVariable](#matrixvariable)** —
+* ПРИМЕР 1: [**Ссылка** для перехода](#ссылка-для-перехода)
+* ПРИМЕР 2: [**Кнопка** для перехода](#кнопка-для-перехода)
 
 
 
@@ -316,7 +321,7 @@ public String getCarDetails(@PathVariable String id, @MatrixVariable Map<String,
 ```html
 <a th:href="@{'/user/' + ${user.id}}">Просмотреть пользователя</a>
 ```
-Здесь 
+> Здесь 
 >  * `user.id` — это идентификатор, который мы передаем в ссылку, и _Thymeleaf_ динамически подставит его в _URL_. 
 Например, если `user.id = 123`, ссылка станет: `/user/123`.
 
@@ -335,7 +340,7 @@ public class UserController {
     }
 }
 ```
-Здесь:
+> Здесь:
 > * `@GetMapping("/user/{id}")` — контроллер обрабатывает GET-запросы по пути `/user/{id}`, 
 где `{id}` — это переменная, которую можно извлечь с помощью `@PathVariable`.
 > * `@PathVariable Long id` — извлекаем переменную `id` из URL и передаем ее в метод контроллера.
@@ -373,7 +378,7 @@ public class UserController {
     <button type="submit">Перейти</button>
 </form>
 ```
-Здесь:
+> Здесь:
 > * `th:action="@{/someAction}"` — указывает URL для перенаправления (в данном случае, `/someAction`).
 > * Метод отправки формы — `GET`, что соответствует обычному переходу по ссылке.
 
@@ -390,7 +395,7 @@ public class SomeController {
     }
 }
 ```
-Здесь:
+> Здесь:
 > * `@GetMapping("/someAction")` — обрабатывает GET-запрос по пути `/someAction`.
 > * Внутри метода можно реализовать любую необходимую логику, а затем вернуть имя представления, например, `"result-page"`.
 
