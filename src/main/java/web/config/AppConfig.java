@@ -20,8 +20,8 @@ import java.util.Properties;
 
 
 @Configuration
-@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
-//@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
+//@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
+@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
 @EnableTransactionManagement
 @ComponentScan(value = "web")
 public class AppConfig {
@@ -51,8 +51,8 @@ public class AppConfig {
       factoryBean.setPackagesToScan("web.model"); // Сканируем пакет с сущностями
 
       HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-//      vendorAdapter.setShowSql(true);
-//      vendorAdapter.setGenerateDdl(false); // отключаем автоматическое создание схемы, если это не нужно
+      vendorAdapter.setShowSql(true);
+      vendorAdapter.setGenerateDdl(false); // отключаем автоматическое создание схемы, если это не нужно
       factoryBean.setJpaVendorAdapter(vendorAdapter);
 
       Properties jpaProperties = new Properties();
