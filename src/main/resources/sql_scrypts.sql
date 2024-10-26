@@ -1,15 +1,15 @@
-\c itm_task019_spring_task_2_3_1_db;                         -- Переключает активную базу данных на ITM_task013_TaskHibernate_Task_2_db;
+\c itm_task020_spring_task_3_1_1_db;                         -- Переключает активную базу данных на ITM_task013_TaskHibernate_Task_2_db;
 SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'; -- Показать все таблицы из базы данных
 
 
 DROP TABLE IF EXISTS users;
-DROP DATABASE IF EXISTS itm_task019_spring_task_2_3_1_db;    -- Удаляю базу если она существует;
+DROP DATABASE IF EXISTS itm_task020_spring_task_3_1_1_db;    -- Удаляю базу если она существует;
 
-CREATE DATABASE itm_task019_spring_task_2_3_1_db;            -- Создаю базу если она еще не существует;
+CREATE DATABASE itm_task020_spring_task_3_1_1_db;            -- Создаю базу если она еще не существует;
 
 CREATE USER user1 WITH PASSWORD '1234';                                         -- Создаем пользователя с паролем
 
-GRANT ALL PRIVILEGES ON DATABASE itm_task019_spring_task_2_3_1_db TO user1;  -- Даём пользователю права на базу данных
+GRANT ALL PRIVILEGES ON DATABASE itm_task020_spring_task_3_1_1_db TO user1;  -- Даём пользователю права на базу данных
 
 CREATE TABLE IF NOT EXISTS users (
                        user_id BIGSERIAL PRIMARY KEY,           -- Поле id с автоинкрементом (эквивалент LONG в Java);
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users (
 SELECT * FROM users;
 
 DROP TABLE IF EXISTS users;
-DROP DATABASE IF EXISTS itm_task019_spring_task_2_3_1_db;    -- Удаляю базу если она существует;
+DROP DATABASE IF EXISTS itm_task020_spring_task_3_1_1_db;    -- Удаляю базу если она существует;
 
 
 
