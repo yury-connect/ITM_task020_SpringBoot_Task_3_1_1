@@ -19,10 +19,6 @@
     <packaging>war</packaging>
 
 
-<!--    <properties>-->
-<!--        <spring.version>5.3.14</spring.version>-->
-<!--    </properties>-->
-
     <dependencies>
         <!-- Spring Boot Web -->
         <dependency>

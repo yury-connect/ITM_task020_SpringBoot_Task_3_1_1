@@ -1,5 +1,9 @@
 Для поддержки TomCat русских символов рекомендуется переписать секцию (дополнить) `server.xml` следующим образом:
 
+Запуск Приложения:   mvn spring-boot:run
+
+---
+
 ```xml
     URIEncoding="UTF-8"
     useBodyEncodingForURI="true"
