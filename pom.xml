@@ -76,6 +76,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -91,6 +92,21 @@
         </dependency>
     </dependencies>
 
+<!--    В редких случаях, центральный репозиторий Maven может не содержать нужной версии артефакта.
+В этом случае попробуйте добавить репозиторий вручную в секцию.
+Это к сожалению МОЙ случай. После добавления - нужные зависимости подтянулись.-->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

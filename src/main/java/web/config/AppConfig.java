@@ -9,10 +9,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
+//import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
+//import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -20,8 +20,8 @@ import java.util.Properties;
 
 
 @Configuration
-//@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
-@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
+@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
+//@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
 @EnableTransactionManagement
 @ComponentScan(value = "web")
 public class AppConfig {
