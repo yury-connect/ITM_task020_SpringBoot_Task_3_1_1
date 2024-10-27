@@ -26,6 +26,13 @@ public class UserController {
 
 
 
+//    @GetMapping("/")
+    @GetMapping()
+    public String getAllUsers(Model model) {
+        // В этом случае - перенаправлю на страничку по умолчанию
+        return "redirect:/users/all";
+    }
+
     // GET: Генерация пользователей (не изменяет существующих данных, просто вызывает логику)
     @GetMapping("/generate")
     public String generateUsers(@RequestParam(name = "count_generated_users", required = false, defaultValue = "1") Integer count) {
@@ -46,6 +53,7 @@ public class UserController {
         defaultUser.setAddress("Default_Address // " + defaultUser.getAddress());
 
         model.addAttribute("created_user", defaultUser);
+//        return "users_pages/create_user_page";
         return "create_user_page";
     }
 
@@ -62,6 +70,7 @@ public class UserController {
     @GetMapping("/all")
     public String showAllPage(Model model) {
         model.addAttribute("all_existing_users", service.getAll());
+//        return "users_pages/all_users";
         return "all_users";
     }
 
@@ -71,6 +80,7 @@ public class UserController {
     @GetMapping("/view")
     public String showUserPage(@RequestParam("id_viewed_user") Integer id, Model model) {
         model.addAttribute("viewed_user", service.getById(id));
+//        return "users_pages/view_user_page";
         return "view_user_page";
     }
 
@@ -80,7 +90,8 @@ public class UserController {
     @GetMapping("/edit")
     public String showEditUsersPage(@RequestParam("id_edited_user") Integer id, Model model) {
         model.addAttribute("edited_user", service.getById(id));
-        return "update_user_page";
+//        return "users_pages/update_user_page";
+        return "users_pages/update_user_page";
     }
 
     // PUT: Обновление данных пользователя (используем PUT для обновления)
@@ -96,6 +107,7 @@ public class UserController {
     @GetMapping("/delete")
     public String showDeleteUsersPage(@RequestParam("id_removed_user") Integer id, Model model) {
         model.addAttribute("removed_user", service.getById(id));
+//        return "users_pages/delete_user_page";
         return "delete_user_page";
     }
 

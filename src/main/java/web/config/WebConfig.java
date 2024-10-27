@@ -29,13 +29,13 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
+    // Теперь настройки для Thymeleaf считываются из application.properties, поэтому конфигурация упрощена.
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/pages/"); // Шаблонизатор Thymeleaf
-        templateResolver.setSuffix(".html"); // Шаблонизатор Thymeleaf
-        templateResolver.setCharacterEncoding("UTF-8"); // Я добавил кодировку для работы с русскими буквами // Шаблонизатор Thymeleaf
+        // Эти параметры уже настроены в application.properties
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 
@@ -52,7 +52,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
-        resolver.setCharacterEncoding("UTF-8"); // БЕЗ ЭТОЙ СТРОЧКИ РУССКИЕ БУКВЫ НЕ ОТОБРАЖАЮТСЯ В БРАУЗЕРЕ !!!
+        resolver.setCharacterEncoding("UTF-8"); // Поддержка UTF-8, чтобы русские символы отображались корректно - БЕЗ ЭТОЙ СТРОЧКИ РУССКИЕ БУКВЫ НЕ ОТОБРАЖАЮТСЯ В БРАУЗЕРЕ !!!
         registry.viewResolver(resolver);
     }
 
@@ -61,6 +61,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
     }
 
     // Этот код включает поддержку методов DELETE, PUT и PATCH через скрытое поле _method в форме.

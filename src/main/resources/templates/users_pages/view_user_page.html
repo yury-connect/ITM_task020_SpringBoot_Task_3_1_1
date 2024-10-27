@@ -56,19 +56,19 @@
         <table border="0">
             <tr>
                 <td style = "width: 200px; text-align: center;">
-                    <form method="GET" th:action="@{/users/edit}">
+                    <form method="GET" th:action="@{/templates/users_pages/edit}">
                         <input type="hidden" name="id_edited_user" th:value="${viewed_user.id}" />
                         <input type="submit" value="-= Edit =-"/>
                     </form>
                 </td>
                 <td style = "width: 200px; text-align: center;">
-                    <form method="GET" th:action="@{/users/delete}">
+                    <form method="GET" th:action="@{/templates/users_pages/delete}">
                         <input type="hidden" name="id_removed_user" th:value="${viewed_user.id}" />
                         <input type="submit" value="-= Delete =-"/>
                     </form>
                 </td>
                 <td style = "width: 200px; text-align: center;">
-                    <form th:method="GET" th:action="@{/users/all}">
+                    <form th:method="GET" th:action="@{/templates/users_pages/all}">
                         <input type="submit" value="-= Cancel =-"/>
                     </form>
                 </td>
