@@ -18,7 +18,8 @@ import java.util.Properties;
 
 
 @Configuration
-@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
+//@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
+@PropertySource({"classpath:dbPostgreSQL.properties", "classpath:application.properties"}) // работаем с базами   PostgreSQL
 //@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
 @EnableTransactionManagement
 @ComponentScan(value = "web")
@@ -65,6 +66,14 @@ public class AppConfig {
       factoryBean.setJpaProperties(jpaProperties);
 
       return factoryBean;
+   }
+
+   // *** *** ***     УДАЛИТЬ     *** *** ***
+   // Вывожу на экран загруженные пути, которые будут использоваться в Thymeleaf для отображения шаблонов
+   @Bean
+   public void logProperties() {
+      System.out.println("Thymeleaf prefix: " + env.getProperty("spring.thymeleaf.prefix"));
+      System.out.println("Thymeleaf suffix: " + env.getProperty("spring.thymeleaf.suffix"));
    }
 
 

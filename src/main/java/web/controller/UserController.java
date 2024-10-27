@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping("/all")
     public String showAllPage(Model model) {
         model.addAttribute("all_existing_users", service.getAll());
-//        return "users_pages/all_users";
+//        return "templates/users_pages/all_users";
         return "all_users";
     }
 
@@ -91,7 +91,7 @@ public class UserController {
     public String showEditUsersPage(@RequestParam("id_edited_user") Integer id, Model model) {
         model.addAttribute("edited_user", service.getById(id));
 //        return "users_pages/update_user_page";
-        return "users_pages/update_user_page";
+        return "update_user_page";
     }
 
     // PUT: Обновление данных пользователя (используем PUT для обновления)

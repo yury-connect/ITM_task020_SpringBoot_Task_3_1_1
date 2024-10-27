@@ -32,10 +32,16 @@ public class WebConfig implements WebMvcConfigurer {
     // Теперь настройки для Thymeleaf считываются из application.properties, поэтому конфигурация упрощена.
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        /*SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
         // Эти параметры уже настроены в application.properties
-        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCharacterEncoding("UTF-8");*/
+
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setPrefix("classpath:/templates/users_pages/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML");
+        templateResolver.setCacheable(false);
         return templateResolver;
     }
 
