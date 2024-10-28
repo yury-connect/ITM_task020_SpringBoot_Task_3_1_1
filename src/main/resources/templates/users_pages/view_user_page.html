@@ -3,27 +3,51 @@
     <head>
         <meta charset="UTF-8">
         <title>View user page</title>
+        <style>
+            /* Убираем избыточные inline-стили и добавляем CSS классы */
+            .table-header {
+                width: 200px;
+                background-color: lightcyan;
+                text-align: center;
+            }
+            .table-data {
+                width: 500px;
+                text-align: center;
+            }
+            .section-header {
+                background-color: aqua;
+                text-align: center;
+            }
+            .button-container {
+                width: 200px;
+                text-align: center;
+            }
+        </style>
     </head>
 
     <body>
         <h1>View user:</h1>
 
+        <!-- Таблица для отображения данных пользователя -->
         <table border="5">
+
+            <!-- Заголовок таблицы -->
             <tr>
-                <td style = "width: 200px; background-color: lightcyan; text-align: center;">Parameter</td>
-                <td style = "width: 500px; background-color: lightcyan; text-align: center;">Value</td>
+                <td class="table-header">Parameter</td>
+                <td class="table-header">Value</td>
             </tr>
+
+            <!-- Информация о пользователе -->
             <tr>
-                <td style = "background-color: aqua;"></td>
-                <td style = "background-color: aqua; text-align: center;">User info:</td>
+                <td class="section-header" colspan="2">User Info:</td>
             </tr>
             <tr>
                 <td>User Id</td>
                 <td th:text="${viewed_user.getId()}">User Id</td>
             </tr>
             <tr>
-                <td>User name // Login</td>
-                <td th:text="${viewed_user.getUserName()}">User name</td>
+                <td>User Name // Login</td>
+                <td th:text="${viewed_user.getUserName()}">User Name</td>
             </tr>
             <tr>
                 <td>Password</td>
@@ -34,13 +58,13 @@
                 <td th:text="${viewed_user.getEmail()}">Email</td>
             </tr>
 
+            <!-- Личная информация -->
             <tr>
-                <td  style = "background-color: aqua;"></td>
-                <td style = "background-color: aqua; text-align: center;">Personal info:</td>
+                <td class="section-header" colspan="2">Personal Info:</td>
             </tr>
             <tr>
-                <td>Full name</td>
-                <td th:text="${viewed_user.getFullName()}">Full name</td>
+                <td>Full Name</td>
+                <td th:text="${viewed_user.getFullName()}">Full Name</td>
             </tr>
             <tr>
                 <td>Date of Birth</td>
@@ -53,22 +77,29 @@
         </table>
         <br/> <br/> <br/>
 
+        <!-- Кнопки управления -->
         <table border="0">
             <tr>
-                <td style = "width: 200px; text-align: center;">
+                <!-- Кнопка редактирования пользователя -->
+                <td class="button-container">
                     <form method="GET" th:action="@{/users/edit}">
                         <input type="hidden" name="id_edited_user" th:value="${viewed_user.id}" />
                         <input type="submit" value="-= Edit =-"/>
                     </form>
                 </td>
-                <td style = "width: 200px; text-align: center;">
-                    <form method="GET" th:action="@{/users/delete}">
+
+                <!-- Кнопка удаления пользователя (с изменением метода на POST) -->
+                <td class="button-container">
+                    <form method="POST" th:action="@{/users/delete}">
                         <input type="hidden" name="id_removed_user" th:value="${viewed_user.id}" />
-                        <input type="submit" value="-= Delete =-"/>
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button type="submit">-= Delete =-</button>
                     </form>
                 </td>
-                <td style = "width: 200px; text-align: center;">
-                    <form th:method="GET" th:action="@{/users/all}">
+
+                <!-- Кнопка отмены и возврата ко всем пользователям -->
+                <td class="button-container">
+                    <form method="GET" th:action="@{/users/all}">
                         <input type="submit" value="-= Cancel =-"/>
                     </form>
                 </td>

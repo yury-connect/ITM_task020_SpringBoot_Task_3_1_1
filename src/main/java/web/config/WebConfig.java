@@ -1,6 +1,7 @@
 package web.config;
 
 import org.springframework.context.ApplicationContext;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.filter.CharacterEncodingFilter;
@@ -22,26 +23,11 @@ public class WebConfig implements WebMvcConfigurer {
         this.applicationContext = applicationContext;
     }
 
-    // Это я подключил для того, чтобы были доступны статические ресурсы, в частности css стили
-    /*@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
-        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
-        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
-    }*/
-
+    /*
     // Этот код включает поддержку методов DELETE, PUT и PATCH через скрытое поле _method в форме.
-//    @Bean
-//    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-//        return new HiddenHttpMethodFilter();
-//    }
-
-    // Этот фильтр нужен для того, чтобы все запросы и ответы обрабатывались с кодировкой UTF-8.
-//    @Bean
-//    public Filter characterEncodingFilter() {
-//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-//        filter.setEncoding("UTF-8");
-//        filter.setForceEncoding(true);  // Принудительно задаем кодировку UTF-8 для всех запросов и ответов
-//        return filter;
-//    }
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
+    */
 }

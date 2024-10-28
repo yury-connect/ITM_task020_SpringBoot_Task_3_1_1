@@ -18,8 +18,8 @@ import java.util.Properties;
 
 
 @Configuration
-//@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
-@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
+@PropertySource("classpath:dbPostgreSQL.properties") // работаем с базами   PostgreSQL
+//@PropertySource("classpath:dbMySQL.properties") // работаем с базами   MySQL
 @EnableTransactionManagement
 @ComponentScan(value = "web")
 public class AppConfig {

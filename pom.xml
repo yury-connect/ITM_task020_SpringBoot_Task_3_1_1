@@ -90,6 +90,14 @@
             <artifactId>commons-dbcp2</artifactId>
             <version>2.9.0</version>
         </dependency>
+
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 <!--    В редких случаях, центральный репозиторий Maven может не содержать нужной версии артефакта.
