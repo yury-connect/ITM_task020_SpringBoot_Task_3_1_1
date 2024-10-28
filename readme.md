@@ -37,7 +37,6 @@ ITM_task020_SpringBoot_Task_3_1_1
     │       │       AppConfig.java
     │       │       AppInit.java
     │       │       WebConfig.java
-    │       │       WebConfig.java~
     │       │
     │       ├───controller
     │       │       HelloController.java
@@ -49,7 +48,6 @@ ITM_task020_SpringBoot_Task_3_1_1
     │       │       UserDaoImplList.java
     │       │
     │       ├───model
-    │       │       Car.java~
     │       │       User.java
     │       │
     │       ├───service
@@ -80,6 +78,8 @@ ITM_task020_SpringBoot_Task_3_1_1
 
 ```
 
+> Иерархтию прорисовываем с помощью стандартной утилиты **tree** :
+> 
 > 1. Установим **tree**
 > 
 > `choco install tree` - Скачать и установить _tree_ из _official site_ или через _Chocolatey_ // Windows
