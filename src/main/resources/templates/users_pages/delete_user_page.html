@@ -2,11 +2,11 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>View user page</title>
+        <title>Delete user page</title>
     </head>
 
     <body>
-        <h1>View user:</h1>
+        <h1>Delete user:</h1>
 
         <table border="5">
             <tr>
@@ -19,56 +19,54 @@
             </tr>
             <tr>
                 <td>User Id</td>
-                <td th:text="${viewed_user.getId()}">User Id</td>
+                <td th:text="${removed_user.getId()}">User Id</td>
             </tr>
             <tr>
                 <td>User name // Login</td>
-                <td th:text="${viewed_user.getUserName()}">User name</td>
+                <td th:text="${removed_user.getUserName()}">User name</td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td th:text="${viewed_user.getPassword()}">Password</td>
+                <td th:text="${removed_user.getPassword()}">Password</td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td th:text="${viewed_user.getEmail()}">Email</td>
+                <td th:text="${removed_user.getEmail()}">Email</td>
             </tr>
 
             <tr>
-                <td  style = "background-color: aqua;"></td>
+                <td style = "background-color: aqua;"></td>
                 <td style = "background-color: aqua; text-align: center;">Personal info:</td>
             </tr>
             <tr>
                 <td>Full name</td>
-                <td th:text="${viewed_user.getFullName()}">Full name</td>
+                <td th:text="${removed_user.getFullName()}">Full name</td>
             </tr>
             <tr>
                 <td>Date of Birth</td>
-                <td th:text="${viewed_user.getDateBirth()}">Date of Birth</td>
+                <td th:text="${removed_user.getDateBirth()}">Date of Birth</td>
             </tr>
             <tr>
                 <td>Address</td>
-                <td th:text="${viewed_user.getAddress()}">Address</td>
+                <td th:text="${removed_user.getAddress()}">Address</td>
             </tr>
         </table>
         <br/> <br/> <br/>
 
+        <h2>Do you really want to delete this user?</h2>
+        <br/> <br/>
+
         <table border="0">
             <tr>
                 <td style = "width: 200px; text-align: center;">
-                    <form method="GET" th:action="@{/users/edit}">
-                        <input type="hidden" name="id_edited_user" th:value="${viewed_user.id}" />
-                        <input type="submit" value="-= Edit =-"/>
+                    <form method="POST" th:action="@{/users/delete}">
+                        <input type="hidden" name="id_removed_user" th:value="${removed_user.getId()}" />
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <input type="submit" value="-= Confirm DELETION =-"/>
                     </form>
                 </td>
                 <td style = "width: 200px; text-align: center;">
-                    <form method="GET" th:action="@{/users/delete}">
-                        <input type="hidden" name="id_removed_user" th:value="${viewed_user.id}" />
-                        <input type="submit" value="-= Delete =-"/>
-                    </form>
-                </td>
-                <td style = "width: 200px; text-align: center;">
-                    <form th:method="GET" th:action="@{/users/all}">
+                    <form th:method="GET" th:action="@{/users/all}" accept-charset="UTF-8">
                         <input type="submit" value="-= Cancel =-"/>
                     </form>
                 </td>

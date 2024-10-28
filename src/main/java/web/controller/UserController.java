@@ -19,6 +19,7 @@ public class UserController {
     private UserService service;
 
 
+
     @Autowired
     public UserController(UserService service) {
         this.service = service;
@@ -26,30 +27,36 @@ public class UserController {
 
 
 
-    // GET: Генерация пользователей (не изменяет существующих данных, просто вызывает логику)
-    @GetMapping("/generate")
-    public String generateUsers(@RequestParam(name = "count_generated_users", required = false, defaultValue = "1") Integer count) {
-        UserUtils.generateUsers(count).stream().forEach(usr -> service.save(usr));
+    // Перенаправление на список всех пользователей (GET)
+    @GetMapping()
+    public String getAllUsers(Model model) { // В этом случае - перенаправлю на страничку по умолчанию
         return "redirect:/users/all";
     }
 
-    // GET: Отображение страницы создания пользователя
+    // Генерация тестовых пользователей (GET)
+    @GetMapping("/generate")
+    public String generateUsers(@RequestParam(name = "count_generated_users", required = false, defaultValue = "1") Integer count) {
+        UserUtils.generateUsers(count).forEach(service::save);
+        return "redirect:/users/all";
+    }
+
+    // Отображение страницы создания пользователя (GET)
     @GetMapping("/create")
     public String showCreateUsersPage(Model model) {
         User defaultUser = UserUtils.generateUser();
 
         defaultUser.setId(-1);
-        defaultUser.setUserName("Default_UserName // " + defaultUser.getUserName());
-        defaultUser.setEmail("Default_Email // " + defaultUser.getEmail());
-        defaultUser.setFullName("Default_UserName // " + defaultUser.getFullName());
+        defaultUser.setUserName("Default_UserName_" + defaultUser.getUserName());
+        defaultUser.setEmail("Default_Email_" + defaultUser.getEmail());
+        defaultUser.setFullName("Default_UserName_" + defaultUser.getFullName());
         defaultUser.setDateBirth(new Date(System.currentTimeMillis()));
-        defaultUser.setAddress("Default_Address // " + defaultUser.getAddress());
+        defaultUser.setAddress("Default_Address_" + defaultUser.getAddress());
 
         model.addAttribute("created_user", defaultUser);
         return "create_user_page";
     }
 
-    // POST: Создание нового пользователя (следует использовать POST для создания новых записей)
+    // Создание нового пользователя (POST)
     @PostMapping("/create")
     public String createUser(@ModelAttribute("created_user") User user) {
         service.save(user);
@@ -58,7 +65,7 @@ public class UserController {
 
 
 
-    // GET: Отображение всех пользователей
+    // Отображение всех пользователей (GET)
     @GetMapping("/all")
     public String showAllPage(Model model) {
         model.addAttribute("all_existing_users", service.getAll());
@@ -67,7 +74,7 @@ public class UserController {
 
 
 
-    // GET: Просмотр информации о конкретном пользователе
+    // Просмотр информации о конкретном пользователе (GET)
     @GetMapping("/view")
     public String showUserPage(@RequestParam("id_viewed_user") Integer id, Model model) {
         model.addAttribute("viewed_user", service.getById(id));
@@ -76,14 +83,14 @@ public class UserController {
 
 
 
-    // GET: Отображение страницы редактирования пользователя
+    // Отображение страницы редактирования пользователя (GET)
     @GetMapping("/edit")
     public String showEditUsersPage(@RequestParam("id_edited_user") Integer id, Model model) {
         model.addAttribute("edited_user", service.getById(id));
         return "update_user_page";
     }
 
-    // PUT: Обновление данных пользователя (используем PUT для обновления)
+    // Обновление данных пользователя (POST с имитацией PUT)
     @PostMapping("/edit")
     public String editUsers(@ModelAttribute("edited_user") User user) {
         service.update(user);
@@ -92,21 +99,22 @@ public class UserController {
 
 
 
-    // GET: Отображение страницы для подтверждения удаления пользователя
+    // Подтверждение удаления пользователя (GET)
     @GetMapping("/delete")
     public String showDeleteUsersPage(@RequestParam("id_removed_user") Integer id, Model model) {
+        System.out.println("ID for deletion: " + id); // Добавьте отладочный вывод                   *** *** *** *** ***   УДАЛИТЬ   *** *** *** ***
         model.addAttribute("removed_user", service.getById(id));
         return "delete_user_page";
     }
 
-    // DELETE: Удаление пользователя (следует использовать DELETE)
+    // Удаление пользователя (POST с имитацией DELETE)
     @PostMapping("/delete")
     public String deleteUsers(@RequestParam(name = "id_removed_user") Integer id) {
         service.delete(id);
         return "redirect:/users/all";
     }
 
-    // DELETE: Удаление всех пользователей (следует использовать DELETE)
+    // Удаление всех пользователей (POST с имитацией DELETE)
     @PostMapping("/delete_all")
     public String deleteAllUsers() {
         List<User> deleteUsersList = new ArrayList<>(service.getAll());
