@@ -44,7 +44,6 @@ public class AppConfig {
    }
 
 
-
    @Bean // Настройка EntityManagerFactory
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -63,7 +62,6 @@ public class AppConfig {
       jpaProperties.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
 
       factoryBean.setJpaProperties(jpaProperties);
-
       return factoryBean;
    }
 
